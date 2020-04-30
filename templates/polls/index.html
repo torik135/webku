@@ -1,0 +1,101 @@
+{% extends 'polls/base.html' %}
+
+{% block konten %}
+
+<!--Main layout-->
+  <main class="pt-5 mx-lg-5">
+    <div class="container-fluid mt-5">
+
+      <!-- Heading -->
+      <div class="card mb-4 wow fadeIn">
+
+        <!--Card content-->
+        <div class="card-body d-sm-flex justify-content-between">
+
+          <h4 class="mb-2 mb-sm-0 pt-1">
+            <a href="https://mdbootstrap.com/docs/jquery/" target="_blank">JUDUL</a>
+            <span>/</span>
+            <span>Jurnal</span>
+          </h4>
+
+          <form class="d-flex justify-content-center">
+            <!-- Default input -->
+            <input type="search" placeholder="CARI" aria-label="Search" class="form-control">
+            <button class="btn btn-primary btn-sm my-0 p" type="submit">
+              <i class="fas fa-search"></i>
+            </button>
+
+          </form>
+
+        </div>
+
+      </div>
+      <!-- Heading -->
+
+      <!--Grid row-->
+      <div class="row wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-md-9 mb-4">
+
+          {% if q_terakhir %}
+          {% for q in q_terakhir %}
+          <!--Card-->
+          <div class="card">
+            <!--Card content-->
+            <div class="card-body">
+              <li><a href= "{% url 'polls:detail' q.id %}">{{ q.question_title }}</a></li> {{ q.pub_date }}<hr>
+            </div>
+            <div class='container'>
+              <div class='card-body'>{{ q.question_text}}</div>
+            </div>
+          </div>
+          <br>
+          <!--/.Card-->
+          {% endfor %}
+          {% else %}
+            <p>KOSONG</p>
+          {% endif %}
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-md-3 mb-4">
+
+          <!--Card-->
+          <div class="card mb-4">
+
+            <!--Card content-->
+            <div class="card-body">
+
+              <!-- List group links -->
+              <div class="list-group list-group-flush">
+
+                <a class="list-group-item list-group-item-action waves-effect">{{ q.get_choice_text_display }}
+                  <span class="badge badge-success badge-pill pull-right"> {{ q.vote.count }}
+                    <i class="fas fa-arrow-up ml-1"></i>
+                  </span>
+                </a>
+              </div>
+              <!-- List group links -->
+
+            </div>
+
+          </div>
+          <!--/.Card-->
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+      <!--Grid row-->
+
+      </div>
+      <!--/.Card-->
+  </main>
+  <!--Main layout-->
+
+{% endblock %}
